@@ -5,3 +5,4 @@ pytz
 sqlparse
 djangorestframework
 requests
+django-cors-headers
