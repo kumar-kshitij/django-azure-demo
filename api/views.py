@@ -1,4 +1,5 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -128,3 +129,9 @@ class DummyView(APIView):
         return Response(json_body,status = status.HTTP_200_OK)
 
         
+=======
+
+# Create your views here.
+def index(request):
+    return render(request, 'api/index.html', context=None)
+>>>>>>> parent of 2a7021f... added sigabrt apis
