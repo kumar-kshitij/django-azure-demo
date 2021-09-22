@@ -7,7 +7,6 @@ import requests
 import os
 from wsgiref.util import FileWrapper
 from django.http import HttpResponse
-from dotenv import load_dotenv
 import random
 
 # Create your views here.
@@ -15,8 +14,8 @@ def index(request):
     return render(request, 'api/index.html', context=None)
 class V1View(APIView):
     def post(self, request):
-        load_dotenv()
-        CHATBOT_API = os.environ['CHATBOT_BASE_URL']+"/webhooks/rest/webhook"
+        
+        CHATBOT_API = 'http://13.92.117.36:5005'+"/webhooks/rest/webhook"
         COGNITIVE_API='https://api.cognitive.microsofttranslator.com/translate'
         received_text = request.data['message']
         received_lang = 'en'
@@ -32,8 +31,8 @@ class V1View(APIView):
             }
 
             headers = {
-                'Ocp-Apim-Subscription-Key': os.environ['COGNITIVE_API_KEY'],
-                'Ocp-Apim-Subscription-Region': os.environ['COGNITIVE_REGION'],
+                'Ocp-Apim-Subscription-Key': '9b892b453868462e8ef70b511fa84e77',
+                'Ocp-Apim-Subscription-Region': 'global',
             }
             payload = [{
                 'text': received_text
@@ -60,8 +59,8 @@ class V1View(APIView):
                 }
 
                 headers = {
-                    'Ocp-Apim-Subscription-Key': os.environ['COGNITIVE_API_KEY'],
-                    'Ocp-Apim-Subscription-Region': os.environ['COGNITIVE_REGION'],
+                    'Ocp-Apim-Subscription-Key': '9b892b453868462e8ef70b511fa84e77',
+                    'Ocp-Apim-Subscription-Region': 'global',
                 }
                 payload = [{
                     'text': resp_text

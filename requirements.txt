@@ -4,7 +4,6 @@ pytz==2021.1
 sqlparse==0.4.2
 djangorestframework
 typing
-django-cors-headers
 requests==2.26.0
 pip==21.2.4
 python-dotenv
