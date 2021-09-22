@@ -6,6 +6,7 @@ from rest_framework import status
 import requests
 from django.http import HttpResponse
 import random
+import os
 # Create your views here.
 def index(request):
     return render(request, 'api/index.html', context=None)
@@ -66,7 +67,7 @@ class DummyView(APIView):
 class V1View(APIView):
     def post(self, request):
         
-        CHATBOT_API = 'http://13.92.117.36:5005/webhooks/rest/webhook'
+        CHATBOT_API = os.environ['CHATBOT_BASE_URL']+'/webhooks/rest/webhook'
         COGNITIVE_API='https://api.cognitive.microsofttranslator.com/translate'
         received_text = request.data['message']
         received_lang = 'en'
