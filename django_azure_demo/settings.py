@@ -37,14 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'api',
-    'rest_framework',
-   
-
-=======
     'api'
->>>>>>> parent of 2a7021f... added sigabrt apis
 ]
 
 MIDDLEWARE = [
@@ -55,10 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-   
-=======
->>>>>>> parent of 2a7021f... added sigabrt apis
 ]
 
 ROOT_URLCONF = 'django_azure_demo.urls'
@@ -80,10 +69,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_azure_demo.wsgi.application'
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 2a7021f... added sigabrt apis
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
