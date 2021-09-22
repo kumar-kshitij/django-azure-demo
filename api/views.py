@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import requests
-import os
 from django.http import HttpResponse
 import random
 # Create your views here.
@@ -63,4 +62,67 @@ class DummyView(APIView):
 
         return Response(json_body,status = status.HTTP_200_OK)
 
+
+class V1View(APIView):
+    def post(self, request):
         
+        CHATBOT_API = 'http://13.92.117.36:5005/webhooks/rest/webhook'
+        COGNITIVE_API='https://api.cognitive.microsofttranslator.com/translate'
+        received_text = request.data['message']
+        received_lang = 'en'
+        if 'language' in request.data:
+            received_lang=request.data['language']
+        
+        if received_lang!='en':
+        
+            params = {
+                'api-version': '3.0',
+                'from': received_lang,
+                'to': 'en'
+            }
+
+            headers = {
+                'Ocp-Apim-Subscription-Key': '9b892b453868462e8ef70b511fa84e77',
+                'Ocp-Apim-Subscription-Region':'global',
+            }
+            payload = [{
+                'text': received_text
+            }]
+            cognitive_response = requests.post(COGNITIVE_API, params=params, headers=headers, json=payload)
+            received_text = cognitive_response.json()[0]['translations'][0]['text']
+        
+        print(received_text)
+        myobj = {
+        "sender": "Frontend",
+        "message": received_text,
+        }
+        x = requests.post(CHATBOT_API, json = myobj)
+        json_data = x.json()
+        reply=[]
+        for i in range(len(json_data)):
+            resp_text = json_data[i]['text']
+            if received_lang!='en':
+            
+                params = {
+                    'api-version': '3.0',
+                    'from': 'en',
+                    'to': received_lang
+                }
+
+                headers = {
+                    'Ocp-Apim-Subscription-Key': '9b892b453868462e8ef70b511fa84e77',
+                    'Ocp-Apim-Subscription-Region': 'global',
+                }
+                payload = [{
+                    'text': resp_text
+                }]
+                cognitive_response = requests.post(COGNITIVE_API, params=params, headers=headers, json=payload)
+                resp_text = cognitive_response.json()[0]['translations'][0]['text']
+                    
+            
+            reply.append(resp_text)
+        
+        return Response({"bot_reply":reply},status=status.HTTP_200_OK)
+        
+    def get(self,request):
+        return Response(status = status.HTTP_204_NO_CONTENT)

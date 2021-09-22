@@ -5,4 +5,5 @@ from api import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('dummy_api/v1/', views.DummyView.as_view()),
+    path('api/v1/', views.V1View.as_view()),
 ]
