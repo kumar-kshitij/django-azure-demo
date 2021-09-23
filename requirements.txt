@@ -6,3 +6,4 @@ sqlparse
 djangorestframework
 requests
 django-cors-headers
+django-ipware

@@ -7,6 +7,8 @@ import requests
 from django.http import HttpResponse
 import random
 import os
+from ipware import get_client_ip
+
 # Create your views here.
 def index(request):
     return render(request, 'api/index.html', context=None)
@@ -91,10 +93,12 @@ class V1View(APIView):
             }]
             cognitive_response = requests.post(COGNITIVE_API, params=params, headers=headers, json=payload)
             received_text = cognitive_response.json()[0]['translations'][0]['text']
-        
-        print(received_text)
+        client = 'default'
+        ip, is_routable = get_client_ip(request)
+        if ip is not None and is_routable:
+           client = ip
         myobj = {
-        "sender": "Frontend",
+        "sender": client,
         "message": received_text,
         }
         x = requests.post(CHATBOT_API, json = myobj)
