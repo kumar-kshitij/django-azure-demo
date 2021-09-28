@@ -15,12 +15,15 @@ def index(request):
 def visitor_ip_address(request):
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+    try:
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        
+        return ip.split(":")[0]
+    except:
+        return None
 
 class DummyView(APIView):
     def get(self,request):
@@ -103,15 +106,11 @@ class V1View(APIView):
             cognitive_response = requests.post(COGNITIVE_API, params=params, headers=headers, json=payload)
             received_text = cognitive_response.json()[0]['translations'][0]['text']
         client = 'default'
-        ip, is_routable = get_client_ip(request,proxy_order="right-most")
-        ip1, is_routable1 = get_client_ip(request,proxy_order="left-most")
-        #if ip is not None and is_routable:
-        #   client = ip
-        ip_new = visitor_ip_address(request)
-        client  = ip_new
-        # print(ip,is_routable)
-        # print(ip1,is_routable1)
-        print(ip_new)
+        
+        ip = visitor_ip_address(request)
+        if ip is not None:
+            client  = ip
+        
         myobj = {
         "sender": client,
         "message": received_text,
