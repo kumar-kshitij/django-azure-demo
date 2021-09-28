@@ -23,21 +23,21 @@ class DummyView(APIView):
                         "orderId":"EFHNCIDJ2143534TF",
                         "productId": "TDHDMH5GRSPZ3DNM",
                         "title": "Newhide Designer",
-                        "orderDate": "25/09/2021",
+                        "orderDate": "09/25/2021",
                         "statusDetails":"In Transit at gurgaon",                        
                     },
                     {
                         "orderId":"EYHNCIWE2143454TF",
                         "productId": "9788129135728",
                         "title": "Toshiba 81 cm LED TV HD Ready",
-                        "orderDate": "20/09/2021",
+                        "orderDate": "09/20/2021",
                         "statusDetails":"In Transit at kolkata",                        
                     },
                     {
                         "orderId":"EYRTYIWE2144584TF",
                         "productId": "TVSDD2DSPYU3BFZY",
                         "title": "Titan Analog Watch",
-                        "orderDate": "01/08/2021",
+                        "orderDate": "08/01/2021",
                         "statusDetails":"Delivered",                        
                     }
                 ]
@@ -47,13 +47,13 @@ class DummyView(APIView):
                     "cardName":"AmEx",
                     "cardNumber":"343434343434343",
                     "balance": "$14534",
-                    "billDue":"07/10/2021"
+                    "billDue":"10/07/2021"
                 },
                 {
                     "cardName":"Visa",
                     "cardNumber":"4444333322221111",
                     "balance": "$9462",
-                    "billDue":"14/10/2021"
+                    "billDue":"10/14/2021"
                 }
             ]
         elif param =='supercoin_bal':
