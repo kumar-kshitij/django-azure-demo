@@ -95,9 +95,12 @@ class V1View(APIView):
             received_text = cognitive_response.json()[0]['translations'][0]['text']
         client = 'default'
         ip, is_routable = get_client_ip(request,proxy_order="right-most")
+        ip1, is_routable1 = get_client_ip(request,proxy_order="left-most")
         #if ip is not None and is_routable:
         #   client = ip
         client  = ip
+        print(ip,is_routable)
+        print(ip1,is_routable1)
         myobj = {
         "sender": client,
         "message": received_text,
