@@ -94,7 +94,7 @@ class V1View(APIView):
             cognitive_response = requests.post(COGNITIVE_API, params=params, headers=headers, json=payload)
             received_text = cognitive_response.json()[0]['translations'][0]['text']
         client = 'default'
-        ip, is_routable = get_client_ip(request)
+        ip, is_routable = get_client_ip(request,proxy_order="right-most")
         #if ip is not None and is_routable:
         #   client = ip
         client  = ip
