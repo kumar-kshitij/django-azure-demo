@@ -130,8 +130,8 @@ class V1View(APIView):
                 }
 
                 headers = {
-                    'Ocp-Apim-Subscription-Key': '9b892b453868462e8ef70b511fa84e77',
-                    'Ocp-Apim-Subscription-Region': 'global',
+                    'Ocp-Apim-Subscription-Key': os.environ['COGNITIVE_API_KEY'],
+                    'Ocp-Apim-Subscription-Region': os.environ['COGNITIVE_REGION'],
                 }
                 payload = [{
                     'text': resp_text
